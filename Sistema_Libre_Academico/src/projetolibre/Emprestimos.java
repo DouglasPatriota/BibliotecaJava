@@ -1,34 +1,42 @@
 package projetolibre;
 
-//CRIANDO A CLASSE EMPRESTIMOS, COM ATRIBUTOS PARA CONSULTAR DEPOIS. 
+/**
+ * Representa o registro de emprestimo de um livro para um usuario no sistema.
+ */
 public class Emprestimos {
 	private int idemprestimo;
-	
-	//ULTLIZADO OBJETO LIVROS E USUARIOS PARA ATRIBUTOS. 
+
+	/**
+	 * Objetos Usuarios e Livros vinculados ao emprestimo.
+	 */
 	private Usuarios usuario;
 	private Livros livro;
-	
-	
+
 	private String dataEmprestimo;
 	private String dataDevolucao;
 	private String status;
-	
-	
+
 	private static int contadorId = 1;
-	
-	//O USO DE MÉTODO CONSTRUTOR.
-	
+
+	/**
+	 * Construtor da classe Emprestimos.
+	 * 
+	 * @param usuario        Usuario que esta realizando o emprestimo.
+	 * @param livro          Livro a ser emprestado.
+	 * @param dataEmprestimo Data em que o emprestimo foi realizado.
+	 */
 	public Emprestimos(Usuarios usuario, Livros livro, String dataEmprestimo) {
-	    this.idemprestimo = contadorId++;
-	    this.usuario = usuario;
-	    this.livro = livro;
-	    this.dataEmprestimo = dataEmprestimo;
-	    this.dataDevolucao = null;
-	    this.status = "Ativo";
+		this.idemprestimo = contadorId++;
+		this.usuario = usuario;
+		this.livro = livro;
+		this.dataEmprestimo = dataEmprestimo;
+		this.dataDevolucao = null;
+		this.status = "Ativo";
 	}
 
-	//OS MÉTODOS GET E SET D
-	
+	/**
+	 * Metodos getters e setters para acesso aos atributos do emprestimo.
+	 */
 	public int getIdemprestimo() {
 		return idemprestimo;
 	}
@@ -76,24 +84,4 @@ public class Emprestimos {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public static int getContadorId() {
-		return contadorId;
-	}
-
-	public static void setContadorId(int contadorId) {
-		Emprestimos.contadorId = contadorId;
-	}
-	
-// SOBREESCRITA- FAZ PARTE DO POLIMORFISMO.
-	@Override
-	    public String toString() {
-	        return "Empréstimo #" + idemprestimo +
-	               " | Usuário: " + usuario.getNome() +
-	               " | Livro: " + livro.getTitulo() +
-	               " | Data: " + dataEmprestimo +
-	               " | Status: " + status;
-	    }
-	
-
 }
