@@ -1,33 +1,61 @@
-# Sistema de Biblioteca Universitária — Java
+# 📚 Sistema de Biblioteca Universitária — Java
 
-Projeto acadêmico de console para estudar a modelagem de um sistema de biblioteca usando Java. O código está no projeto Eclipse `Sistema_Libre_Academico/`.
+Sistema acadêmico de gerenciamento de biblioteca em Java aplicando Programação Orientada a Objetos (Herança, Polimorfismo, Abstração e Encapsulamento).
 
-> **Status:** projeto de estudo. Este README descreve o escopo identificado no repositório; não afirma que o sistema esteja pronto para uso em produção.
+---
 
-## Escopo do sistema
+## 🏛️ Aplicando os 4 Pilares da POO
 
-O projeto modela usuários (incluindo alunos e professores), livros e empréstimos/devoluções. As classes e operações devem ser consultadas nos fontes em `Sistema_Libre_Academico/src/`.
+| Pilar da POO | Aplicação no Código |
+| :--- | :--- |
+| **Abstração** | Classe abstrata `Usuarios` definindo a estrutura base para os usuários do sistema. |
+| **Herança** | Classes `Aluno` e `Professor` herdando atributos e métodos de `Usuarios`. |
+| **Polimorfismo** | Sobrescrita dos métodos `apresentar()` e `toString()` nas subclasses `Aluno` e `Professor`. |
+| **Encapsulamento e Associação** | Atributos privados com getters/setters e relacionamentos entre `Livros`, `Emprestimos` e `Usuarios`. |
 
-## O que este projeto ajuda a praticar
+---
 
-- Organizar classes e responsabilidades em um programa Java
-- Representar entidades do domínio com objetos
-- Estudar encapsulamento, herança, abstração e polimorfismo
-- Trabalhar com coleções e regras de negócio simples
-- Ler, executar e evoluir um projeto Java em uma IDE
+## 📋 Funcionalidades do Menu Interativo (`Main.java`)
+1. **Cadastrar Aluno / Professor**: Registro de novos usuários no sistema.
+2. **Cadastrar Livro**: Inclusão de novos exemplares no acervo da biblioteca.
+3. **Realizar Empréstimo**: Associação de um livro disponível a um usuário cadastrado.
+4. **Realizar Devolução**: Atualização do status do livro e encerramento do empréstimo.
+5. **Listar Livros / Empréstimos**: Visualização do acervo e histórico de empréstimos ativos.
+6. **Sair**: Encerramento seguro da execução da aplicação.
 
-## Tecnologias e ferramentas
+---
 
-- Java
-- Eclipse (o repositório inclui metadados de projeto Eclipse)
+## 📁 Estrutura de Diretórios
+```
+Sistema_Libre_Academico/
+└── src/
+    └── projetolibre/
+        ├── Usuarios.java
+        ├── Aluno.java
+        ├── Professor.java
+        ├── Livros.java
+        ├── Emprestimos.java
+        └── Main.java
+```
 
-Não há informação suficiente no repositório para afirmar uma versão específica do Java ou das bibliotecas. Confira a configuração do ambiente antes de executar.
+---
 
-## Como abrir
+## 🚀 Como Executar
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/DouglasPatriota/BibliotecaJava.git
-   ```
-2. Importe a pasta `Sistema_Libre_Academico/` como projeto existente no Eclipse.
-3. Verifique a configuração do JDK e execute a classe principal existente nos fontes.
+### Opção 1: Via Eclipse IDE
+1. Abra o Eclipse IDE.
+2. Importe o projeto localizado na pasta `Sistema_Libre_Academico`.
+3. Execute a classe `Main.java` como uma aplicação Java (Run as -> Java Application).
+
+### Opção 2: Via Terminal (javac / java)
+```bash
+cd Sistema_Libre_Academico/src
+javac projetolibre/*.java
+java projetolibre.Main
+```
+
+---
+
+## 🔮 Próximos Passos Planejados
+- Persistência de dados com **MySQL**.
+- Construção de uma **API REST** utilizando **Spring Boot**.
