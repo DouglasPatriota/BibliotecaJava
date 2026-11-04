@@ -1,16 +1,22 @@
 package projetolibre;
 
-//ESSA CLASSE CRIADA REPRESENTA UM ALUNO, QUE TAMBEM É UM USUÁRIO. 
-//ELE HERDA OS MÉTODOS E ATRIBUTOS DA CLASSE USUÁRIO.
-
+/**
+ * Classe que representa um Aluno, herdando atributos e métodos de Usuarios.
+ */
 public class Aluno extends Usuarios {
 
-	public Aluno(String nome, String matricula, String cpf, String email) {
-		super(nome, matricula, "Aluno", cpf, email);
-	}
-	
-	@Override
-	public String apresentar() {
-	    return "Olá, me chamo " + getNome() + ", matrícula " + getMatricula() + ".";
-	}
+    /**
+     * Construtor da classe Aluno.
+     */
+    public Aluno(String nome, String matricula, String cpf, String email) {
+        super(nome, matricula, "Aluno", cpf, email);
+    }
+
+    /**
+     * Retorna a apresentação das informações do Aluno.
+     */
+    @Override
+    public String apresentar() {
+        return "Olá, me chamo " + getNome() + ", matrícula " + getMatricula() + ".";
+    }
 }
