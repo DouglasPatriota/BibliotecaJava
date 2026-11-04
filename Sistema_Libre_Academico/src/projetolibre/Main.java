@@ -3,217 +3,256 @@ package projetolibre;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// classe principal
-// o menu, as operações, tudo fica aqui
-
+/**
+ * Classe principal do sistema de biblioteca academica.
+ * Gerencia o menu de opcoes, cadastros, consultas, emprestimos e devolucoes.
+ */
 public class Main {
 
-    // nessas 3  listas que guardam tudo enquanto o programa tá rodando
-    static ArrayList<Livros> acervo = new ArrayList<>();       // lista de livros
-    static ArrayList<Usuarios> usuarios = new ArrayList<>();   // lista de usuarios
-    static ArrayList<Emprestimos> emprestimos = new ArrayList<>(); // lista de emprestimos
+	/** Colecao de livros cadastrados no acervo. */
+	static ArrayList<Livros> acervo = new ArrayList<>();
 
-    static Scanner sc = new Scanner(System.in); // le o que a gente digita
+	/** Colecao de usuarios cadastrados no sistema. */
+	static ArrayList<Usuarios> usuarios = new ArrayList<>();
 
-    public static void main(String[] args) {
-        int opcao;
+	/** Colecao de registros de emprestimos ativos e finalizados. */
+	static ArrayList<Emprestimos> emprestimos = new ArrayList<>();
 
-        // fica repetindo o menu até o usuário digitar 0
-        do {
-            System.out.println("\n╔══════════════════════════════════════╗");
-            System.out.println("║        BIBLIOTECA ACADEMICA          ║");
-            System.out.println("╠══════════════════════════════════════╣");
-            System.out.println("║  [1] Cadastrar livro                 ║");
-            System.out.println("║  [2] Cadastrar usuario               ║");
-            System.out.println("║  [3] Listar livros                   ║");
-            System.out.println("║  [4] Consultar disponibilidade       ║");
-            System.out.println("║  [5] Realizar emprestimo             ║");
-            System.out.println("║  [6] Realizar devolucao              ║");
-            System.out.println("║  [0] Sair                            ║");
-            System.out.println("╚══════════════════════════════════════╝");
-            System.out.print("  Escolha uma opcao: ");
-            opcao = sc.nextInt();
-            sc.nextLine(); // limpa o "enter" que sobra após o nextInt
+	/** Leitor de entrada do usuario via terminal. */
+	static Scanner sc = new Scanner(System.in);
 
-            // direciona para o método certo dependendo do que foi digitado
-            switch (opcao) {
-                case 1: cadastrarLivro(); break;
-                case 2: cadastrarUsuario(); break;
-                case 3: listarLivros(); break;
-                case 4: consultarDisponibilidade(); break;
-                case 5: realizarEmprestimo(); break;
-                case 6: realizarDevolucao(); break;
-                case 0: System.out.println("Encerrando..."); break;
-                default: System.out.println("Opcao invalida!");
-            }
-        } while (opcao != 0);
-    }
+	/**
+	 * Ponto de entrada principal da aplicacao.
+	 * 
+	 * @param args Argumentos de linha de comando.
+	 */
+	public static void main(String[] args) {
+		int opcao;
 
-    // CADASTRO DE LIVRO
-    // 
-    // pede os dados do livro, cria o objeto e joga na lista
-    static void cadastrarLivro() {
-        System.out.println("\n--- Cadastrar Livro ---");
-        System.out.print("Titulo: ");
-        String titulo = sc.nextLine();
-        System.out.print("Autor: ");
-        String autor = sc.nextLine();
-        System.out.print("ISBN: ");
-        String isbn = sc.nextLine();
-        System.out.print("Ano: ");
-        int ano = sc.nextInt();
-        sc.nextLine();
-        System.out.print("Editora: ");
-        String editora = sc.nextLine();
+		do {
+			System.out.println("\n======================================");
+			System.out.println("||        BIBLIOTECA ACADEMICA       ||");
+			System.out.println("======================================");
+			System.out.println("|| [1] Cadastrar livro               ||");
+			System.out.println("|| [2] Cadastrar usuario             ||");
+			System.out.println("|| [3] Listar livros                 ||");
+			System.out.println("|| [4] Consultar disponibilidade     ||");
+			System.out.println("|| [5] Realizar emprestimo           ||");
+			System.out.println("|| [6] Realizar devolucao            ||");
+			System.out.println("|| [0] Sair                          ||");
+			System.out.println("======================================");
+			System.out.print("Escolha uma opcao: ");
 
-        // cria o livro e adiciona no acervo
-        Livros livro = new Livros(titulo, autor, isbn, ano, editora);
-        acervo.add(livro);
-        System.out.println("Livro cadastrado com sucesso!");
-    }
+			opcao = sc.nextInt();
+			sc.nextLine();
 
- 
-    // 2. CADASTRO DE USUARIO
-    
-    // pergunta se é aluno ou professor e cria o objeto certo
-    // aqui entra o polimorfismo — apresentar() age diferente pra cada tipo
-    static void cadastrarUsuario() {
-        System.out.println("\n--- Cadastrar Usuario ---");
-        System.out.print("Nome: ");
-        String nome = sc.nextLine();
-        System.out.print("Matricula: ");
-        String matricula = sc.nextLine();
-        System.out.print("CPF: ");
-        String cpf = sc.nextLine();
-        System.out.print("Email: ");
-        String email = sc.nextLine();
-        System.out.print("Tipo (1 - Aluno / 2 - Professor): ");
-        int tipo = sc.nextInt();
-        sc.nextLine();
+			switch (opcao) {
+			case 1:
+				cadastrarLivro();
+				break;
+			case 2:
+				cadastrarUsuario();
+				break;
+			case 3:
+				listarLivros();
+				break;
+			case 4:
+				consultarDisponibilidade();
+				break;
+			case 5:
+				realizarEmprestimo();
+				break;
+			case 6:
+				realizarDevolucao();
+				break;
+			case 0:
+				System.out.println("Saindo do sistema...");
+				break;
+			default:
+				System.out.println("Opcao invalida. Tente novamente.");
+			}
+		} while (opcao != 0);
+	}
 
-        if (tipo == 1) {
-            usuarios.add(new Aluno(nome, matricula, cpf, email));
-        } else if (tipo == 2) {
-            usuarios.add(new Professor(nome, matricula, cpf, email));
-        } else {
-            System.out.println("Tipo invalido!");
-            return;
-        }
+	/**
+	 * Cadastra um novo livro no acervo da biblioteca.
+	 */
+	public static void cadastrarLivro() {
+		System.out.println("\n--- CADASTRAR LIVRO ---");
+		System.out.print("Titulo: ");
+		String titulo = sc.nextLine();
+		System.out.print("Autor: ");
+		String autor = sc.nextLine();
+		System.out.print("ISBN: ");
+		String isbn = sc.nextLine();
+		System.out.print("Ano: ");
+		int ano = sc.nextInt();
+		sc.nextLine();
+		System.out.print("Editora: ");
+		String editora = sc.nextLine();
 
-        // polimorfismo em ação — cada tipo responde diferente no apresentar
-        Usuarios u = usuarios.get(usuarios.size() - 1);
-        System.out.println(u.apresentar());
-        System.out.println("Usuario cadastrado com sucesso!");
-    }
+		Livros novoLivro = new Livros(titulo, autor, isbn, ano, editora);
+		acervo.add(novoLivro);
+		System.out.println("Livro cadastrado com sucesso!");
+	}
 
-    // LISTA DOS LIVROS
-    // percorre a lista e imprime cada livro (usa o toString() da classe Livros)
-    static void listarLivros() {
-        System.out.println("\n--- Acervo de Livros ---");
-        if (acervo.isEmpty()) {
-            System.out.println("Nenhum livro cadastrado.");
-            return;
-        }
-        for (Livros l : acervo) {
-            System.out.println(l); // chama o toString() automaticamente
-        }
-    }
+	/**
+	 * Cadastra um novo usuario (Aluno ou Professor) no sistema.
+	 */
+	public static void cadastrarUsuario() {
+		System.out.println("\n--- CADASTRAR USUARIO ---");
+		System.out.print("Nome: ");
+		String nome = sc.nextLine();
+		System.out.print("Matricula: ");
+		String matricula = sc.nextLine();
+		System.out.print("CPF: ");
+		String cpf = sc.nextLine();
+		System.out.print("Email: ");
+		String email = sc.nextLine();
 
-    // CONSULTA A LISTA SE DISPONIVEL
-    // busca o livro pelo ISBN e mostra se tá disponível ou emprestado
-    static void consultarDisponibilidade() {
-        System.out.println("\n--- Consultar Disponibilidade ---");
-        System.out.print("ISBN do livro: ");
-        String isbn = sc.nextLine();
+		System.out.println("Tipo de Usuario:");
+		System.out.println("1 - Aluno");
+		System.out.println("2 - Professor");
+		System.out.print("Opcao: ");
+		int tipo = sc.nextInt();
+		sc.nextLine();
 
-        for (Livros l : acervo) {
-            if (l.getIsbn().equals(isbn)) {
-                System.out.println(l.getTitulo() + " — " + (l.isDisponivel() ? "Disponivel" : "Emprestado"));
-                return;
-            }
-        }
-        System.out.println("Livro nao encontrado.");
-    }
+		if (tipo == 1) {
+			System.out.print("Curso: ");
+			String curso = sc.nextLine();
+			Usuarios novoAluno = new Aluno(nome, matricula, cpf, email, curso);
+			usuarios.add(novoAluno);
+			System.out.println("Aluno cadastrado com sucesso!");
+		} else if (tipo == 2) {
+			Usuarios novoProf = new Professor(nome, matricula, cpf, email);
+			usuarios.add(novoProf);
+			System.out.println("Professor cadastrado com sucesso!");
+		} else {
+			System.out.println("Tipo invalido!");
+		}
+	}
 
-    //  REALIZA O EMPRESTIMO
-    // busca o usuario e o livro, verifica se tá disponível e registra o emprestimo
-    static void realizarEmprestimo() {
-        System.out.println("\n--- Realizar Emprestimo ---");
+	/**
+	 * Lista todos os livros cadastrados no acervo.
+	 */
+	public static void listarLivros() {
+		System.out.println("\n--- LISTA DE LIVROS ---");
+		if (acervo.isEmpty()) {
+			System.out.println("Nenhum livro cadastrado.");
+			return;
+		}
+		for (Livros l : acervo) {
+			String statusStr = l.isDisponivel() ? "Disponivel" : "Emprestado";
+			System.out.println("- " + l.getTitulo() + " (" + l.getAutor() + ") - Status: " + statusStr);
+		}
+	}
 
-        // procura o usuario pela matricula
-        System.out.print("Matricula do usuario: ");
-        String matricula = sc.nextLine();
-        Usuarios usuarioEncontrado = null;
-        for (Usuarios u : usuarios) {
-            if (u.getMatricula().equals(matricula)) {
-                usuarioEncontrado = u;
-                break;
-            }
-        }
-        if (usuarioEncontrado == null) {
-            System.out.println("Usuario nao encontrado.");
-            return;
-        }
+	/**
+	 * Consulta a disponibilidade de um livro especifico pelo titulo.
+	 */
+	public static void consultarDisponibilidade() {
+		System.out.println("\n--- CONSULTAR DISPONIBILIDADE ---");
+		System.out.print("Digite o titulo do livro: ");
+		String busca = sc.nextLine();
 
-        // procura o livro pelo ISBN
-        System.out.print("ISBN do livro: ");
-        String isbn = sc.nextLine();
-        Livros livroEncontrado = null;
-        for (Livros l : acervo) {
-            if (l.getIsbn().equals(isbn)) {
-                livroEncontrado = l;
-                break;
-            }
-        }
-        if (livroEncontrado == null) {
-            System.out.println("Livro nao encontrado.");
-            return;
-        }
+		boolean encontrado = false;
+		for (Livros l : acervo) {
+			if (l.getTitulo().equalsIgnoreCase(busca)) {
+				encontrado = true;
+				if (l.isDisponivel()) {
+					System.out.println("O livro \"" + l.getTitulo() + "\" esta DISPONIVEL.");
+				} else {
+					System.out.println("O livro \"" + l.getTitulo() + "\" esta EMPRESTADO.");
+				}
+				break;
+			}
+		}
+		if (!encontrado) {
+			System.out.println("Livro nao encontrado no acervo.");
+		}
+	}
 
-        // verifica se o livro tá disponível antes de emprestar
-        if (!livroEncontrado.isDisponivel()) {
-            System.out.println("Livro indisponivel para emprestimo.");
-            return;
-        }
+	/**
+	 * Realiza o emprestimo de um livro disponivel para um usuario cadastrado.
+	 */
+	public static void realizarEmprestimo() {
+		System.out.println("\n--- REALIZAR EMPRESTIMO ---");
+		System.out.print("Matricula do usuario: ");
+		String mat = sc.nextLine();
 
-        System.out.print("Data do emprestimo (dd/mm/aaaa): ");
-        String data = sc.nextLine();
+		Usuarios user = null;
+		for (Usuarios u : usuarios) {
+			if (u.getMatricula().equalsIgnoreCase(mat)) {
+				user = u;
+				break;
+			}
+		}
 
-        // marca o livro como indisponível e registra o emprestimo
-        livroEncontrado.setDisponivel(false);
-        Emprestimos emp = new Emprestimos(usuarioEncontrado, livroEncontrado, data);
-        emprestimos.add(emp);
-        System.out.println("Emprestimo #" + emp.getIdemprestimo() + " realizado com sucesso!");
-    }
+		if (user == null) {
+			System.out.println("Usuario nao encontrado.");
+			return;
+		}
 
-    // FAZ A DEVOLUCAO
-    // busca o emprestimo pelo número, atualiza o status e libera o livro
-    static void realizarDevolucao() {
-        System.out.println("\n--- Realizar Devolucao ---");
-        System.out.print("Numero do emprestimo: ");
-        int id = sc.nextInt();
-        sc.nextLine();
+		System.out.print("Titulo do livro: ");
+		String tit = sc.nextLine();
 
-        for (Emprestimos e : emprestimos) {
-            if (e.getIdemprestimo() == id) {
+		Livros liv = null;
+		for (Livros l : acervo) {
+			if (l.getTitulo().equalsIgnoreCase(tit)) {
+				liv = l;
+				break;
+			}
+		}
 
-                // evita devolver algo que já foi devolvido
-                if (e.getStatus().equals("Devolvido")) {
-                    System.out.println("Este emprestimo ja foi devolvido.");
-                    return;
-                }
+		if (liv == null) {
+			System.out.println("Livro nao encontrado.");
+			return;
+		}
 
-                System.out.print("Data de devolucao (dd/mm/aaaa): ");
-                String dataDev = sc.nextLine();
+		if (!liv.isDisponivel()) {
+			System.out.println("Livro indisponivel para emprestimo no momento.");
+			return;
+		}
 
-                // atualiza o emprestimo e libera o livro no acervo
-                e.setStatus("Devolvido");
-                e.setDataDevolucao(dataDev);
-                e.getLivro().setDisponivel(true);
-                System.out.println("Devolucao registrada com sucesso!");
-                return;
-            }
-        }
-        System.out.println("Emprestimo nao encontrado.");
-    }
+		System.out.print("Data do emprestimo (DD/MM/AAAA): ");
+		String data = sc.nextLine();
+
+		liv.setDisponivel(false);
+		Emprestimos emp = new Emprestimos(user, liv, data);
+		emprestimos.add(emp);
+
+		System.out.println("Emprestimo realizado com sucesso! ID: " + emp.getIdemprestimo());
+	}
+
+	/**
+	 * Realiza a devolucao de um livro emprestado.
+	 */
+	public static void realizarDevolucao() {
+		System.out.println("\n--- REALIZAR DEVOLUCAO ---");
+		System.out.print("ID do emprestimo: ");
+		int id = sc.nextInt();
+		sc.nextLine();
+
+		Emprestimos empEncontrado = null;
+		for (Emprestimos e : emprestimos) {
+			if (e.getIdemprestimo() == id && e.getStatus().equals("Ativo")) {
+				empEncontrado = e;
+				break;
+			}
+		}
+
+		if (empEncontrado == null) {
+			System.out.println("Emprestimo ativo nao encontrado com este ID.");
+			return;
+		}
+
+		System.out.print("Data da devolucao (DD/MM/AAAA): ");
+		String dataDev = sc.nextLine();
+
+		empEncontrado.setDataDevolucao(dataDev);
+		empEncontrado.setStatus("Devolvido");
+		empEncontrado.getLivro().setDisponivel(true);
+
+		System.out.println("Devolucao concluida com sucesso!");
+	}
 }
