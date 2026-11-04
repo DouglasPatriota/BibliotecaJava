@@ -31,18 +31,3 @@ Não há informação suficiente no repositório para afirmar uma versão espec�
    ```
 2. Importe a pasta `Sistema_Libre_Academico/` como projeto existente no Eclipse.
 3. Verifique a configuração do JDK e execute a classe principal existente nos fontes.
-
-## Próximas melhorias possíveis
-
-- Documentar os passos de compilação e execução após validar o JDK necessário
-- Adicionar exemplos reais de entrada e saída
-- Criar testes para empréstimos, devoluções e disponibilidade
-- Melhorar validações e mensagens para entradas inválidas
-
-## Tópicos sugeridos
-
-`java` · `orientacao-a-objetos` · `projeto-academico` · `sistema-de-biblioteca`
-
-## Nome sugerido para o repositório
-
-`java-sistema-biblioteca-academica`
