@@ -1,158 +1,48 @@
-# 📚 Sistema Acadêmico - Biblioteca Universitária
+# Sistema de Biblioteca Universitária — Java
 
-## 📖 Sobre o Projeto
+Projeto acadêmico de console para estudar a modelagem de um sistema de biblioteca usando Java. O código está no projeto Eclipse `Sistema_Libre_Academico/`.
 
-Este projeto foi desenvolvido com o objetivo de praticar os conceitos da **Programação Orientada a Objetos (POO)** utilizando a linguagem **Java**.
+> **Status:** projeto de estudo. Este README descreve o escopo identificado no repositório; não afirma que o sistema esteja pronto para uso em produção.
 
-O sistema simula o funcionamento de uma biblioteca acadêmica, permitindo o gerenciamento de usuários, livros, empréstimos e devoluções através de uma estrutura organizada e orientada a objetos.
+## Escopo do sistema
 
----
+O projeto modela usuários (incluindo alunos e professores), livros e empréstimos/devoluções. As classes e operações devem ser consultadas nos fontes em `Sistema_Libre_Academico/src/`.
 
-## 🎯 Objetivo
+## O que este projeto ajuda a praticar
 
-Desenvolver uma aplicação capaz de:
+- Organizar classes e responsabilidades em um programa Java
+- Representar entidades do domínio com objetos
+- Estudar encapsulamento, herança, abstração e polimorfismo
+- Trabalhar com coleções e regras de negócio simples
+- Ler, executar e evoluir um projeto Java em uma IDE
 
-* Cadastrar usuários da biblioteca;
-* Diferenciar alunos e professores;
-* Gerenciar o acervo de livros;
-* Realizar empréstimos;
-* Registrar devoluções;
-* Consultar informações dos usuários e dos livros.
+## Tecnologias e ferramentas
 
----
+- Java
+- Eclipse (o repositório inclui metadados de projeto Eclipse)
 
-## 🏛️ Conceitos de POO Aplicados
+Não há informação suficiente no repositório para afirmar uma versão específica do Java ou das bibliotecas. Confira a configuração do ambiente antes de executar.
 
-### Encapsulamento
+## Como abrir
 
-Os atributos das classes são privados e acessados através de métodos getters e setters.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/DouglasPatriota/BibliotecaJava.git
+   ```
+2. Importe a pasta `Sistema_Libre_Academico/` como projeto existente no Eclipse.
+3. Verifique a configuração do JDK e execute a classe principal existente nos fontes.
 
-### Herança
+## Próximas melhorias possíveis
 
-As classes específicas herdam características de uma classe mais genérica.
+- Documentar os passos de compilação e execução após validar o JDK necessário
+- Adicionar exemplos reais de entrada e saída
+- Criar testes para empréstimos, devoluções e disponibilidade
+- Melhorar validações e mensagens para entradas inválidas
 
-Exemplo:
+## Tópicos sugeridos
 
-```java
-public class Aluno extends Usuarios
-```
+`java` · `orientacao-a-objetos` · `projeto-academico` · `sistema-de-biblioteca`
 
-### Polimorfismo
+## Nome sugerido para o repositório
 
-Métodos podem ser sobrescritos pelas classes filhas.
-
-Exemplo:
-
-```java
-@Override
-public String apresentar()
-```
-
-### Abstração
-
-As classes representam entidades reais do sistema, como usuários, alunos, professores e livros.
-
----
-
-## 📂 Estrutura do Projeto
-
-```text
-projetolibre/
-│
-├── Usuarios.java
-├── Aluno.java
-├── Professor.java
-├── Livro.java
-├── Biblioteca.java
-├── Emprestimo.java
-└── Main.java
-```
-
----
-
-## 👨‍🎓 Exemplo de Usuário
-
-```java
-Aluno aluno = new Aluno(
-    "João Silva",
-    "2025001",
-    "123.456.789-00",
-    "joao@email.com"
-);
-```
-
----
-
-## 📚 Funcionalidades
-
-### Usuários
-
-* Cadastro de alunos
-* Cadastro de professores
-* Consulta de usuários
-
-### Livros
-
-* Cadastro de livros
-* Consulta do acervo
-* Verificação de disponibilidade
-
-### Empréstimos
-
-* Realizar empréstimo
-* Registrar devolução
-* Consultar situação dos livros
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-* Java
-* Eclipse IDE
-* Programação Orientada a Objetos
-* Collections (ArrayList / HashMap)
-
----
-
-## ▶️ Como Executar
-
-1. Clone o projeto:
-
-```bash
-git clone https://github.com/seuusuario/sistema-academico.git
-```
-
-2. Importe no Eclipse ou IntelliJ IDEA.
-
-3. Execute a classe:
-
-```java
-Main.java
-```
-
----
-
-## 📌 Exemplo de Saída
-
-```text
-===== SISTEMA DA BIBLIOTECA =====
-
-1 - Cadastrar Usuário
-2 - Cadastrar Livro
-3 - Realizar Empréstimo
-4 - Realizar Devolução
-5 - Consultar Acervo
-0 - Sair
-```
-
----
-
-## 👨‍💻 Autor
-
-Projeto desenvolvido para fins acadêmicos com foco no aprendizado dos pilares da Programação Orientada a Objetos (POO) em Java.
-
-Disciplina: Programação Orientada a Objetos
-
-Instituição: Faculdade / Universidade
-
-Ano: 2026
+`java-sistema-biblioteca-academica`
