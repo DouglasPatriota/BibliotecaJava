@@ -1,19 +1,29 @@
 package projetolibre;
 
-//ESSA CLASSE CRIADA REPRESENTA UM PROFESSOR QUE TAMBEM É UM USUÁRIO. 
-//ELE HERDA OS MÉTODOS E ATRIBUTOS DA CLASSE USUÁRIO.
-
+/**
+ * Representa um professor no sistema academico, herdando atributos e metodos da classe Usuarios.
+ */
 public class Professor extends Usuarios {
-	
-//O USO DE MÉTODO CONSTRUTOR.
 
+	/**
+	 * Construtor da classe Professor.
+	 * 
+	 * @param nome      Nome do professor.
+	 * @param matricula Matricula do professor.
+	 * @param cpf       CPF do professor.
+	 * @param email     E-mail do professor.
+	 */
 	public Professor(String nome, String matricula, String cpf, String email) {
 		super(nome, matricula, "Professor", cpf, email);
 	}
-	
-	// SOBREESCRITA- FAZ PARTE DO POLIMORFISMO.
+
+	/**
+	 * Sobreescrita do metodo de apresentacao do usuario (Polimorfismo).
+	 * 
+	 * @return Mensagem de apresentacao do professor.
+	 */
 	@Override
 	public String apresentar() {
-	    return "Olá, tudo bem, me chamo " + getNome() + ", matrícula " + getMatricula() + ".";
+		return "Olá, tudo bem, me chamo " + getNome() + ", matricula " + getMatricula() + ".";
 	}
 }
